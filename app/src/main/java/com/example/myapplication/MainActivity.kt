@@ -1,8 +1,13 @@
 package com.example.myapplication
 
 import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.setPadding
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -11,12 +16,23 @@ import com.example.myapplication.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var databinding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        databinding=DataBindingUtil.setContentView(this,R.layout.activity_main)
+        //setContentView(R.layout.activity_main)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)){ v,insets ->
+            val systemBars=insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left,systemBars.top,systemBars.right,systemBars.bottom)
+            insets
+        }
+        databinding.btOK.setOnClickListener {
+            databinding.tvHi.text="Hi,   "+databinding.edname.text.toString()
+        }
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        /*binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val navView: BottomNavigationView = binding.navView
@@ -30,6 +46,6 @@ class MainActivity : AppCompatActivity() {
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+        navView.setupWithNavController(navController)*/
     }
 }
