@@ -17,6 +17,9 @@ import com.example.myapplication.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val edName by lazy {  findViewById<EditText>(R.id.edname) }
+    private val btOk by lazy {  findViewById<Button>(R.id.btOK) }
+    private val tvHi by lazy { findViewById<TextView>(R.id.tvHi) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,9 +40,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)*/
 
-        val edName=findViewById<EditText>(R.id.edname)
-        val btOk=findViewById<Button>(R.id.btOK)
-        val tvHi=findViewById<TextView>(R.id.tvHi)
+
 
         btOk.setOnClickListener {
             tvHi.text="Hi,   "+edName.text.toString()
